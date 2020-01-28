@@ -1,0 +1,13 @@
+Bad software is one of the few things in the world you cannot solve with money.
+Billion dollar airlines have flight search apps that are often inferior to those built by groups of students.
+Established taxi companies the world over have terrible booking apps despite the threat they face from ride-sharing services.
+And painful corporate IT systems are usually projects with massive budgets, built over the course of many years.
+Whatever the cause of bad software is, it does not seem to be a lack of funding.
+
+Surprisingly, the root cause of bad software has less to do with specific engineering choices, and more to do with how development projects are managed.
+The worst software projects often proceed in a very particular way:
+
+The project owners start out wanting to build a specific solution and never explicitly identify the problem they are trying to solve.
+They then gather a long list of requirements from a large group of stakeholders.
+This list is then handed off to a correspondingly large external development team, who get to work building this highly customised piece of software from scratch.
+Once all the requirements are met, everyone celebrates as the system is launched and the project is declared complete.
