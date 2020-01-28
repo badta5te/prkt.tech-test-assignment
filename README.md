@@ -2,7 +2,7 @@
 
 ### Install
 
-`$ composer require badta5te/prkt`
+`$ composer require pavelmikhaylov/prkt.tech-test-assignment`
 
 ### Usage
 
