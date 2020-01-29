@@ -16,7 +16,7 @@
     "autoload": {
         "psr-4": {
             "App\\Prkt\\": "src",
-            "Php\\Prkt\\Tests\\": "tests"
+            "App\\Prkt\\Tests\\": "tests"
         },
         "classmap": [
             "src/"
