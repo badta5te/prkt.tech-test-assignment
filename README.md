@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/badta5te/prkt.tech-test-assignment.svg?branch=master)](https://travis-ci.com/badta5te/prkt.tech-test-assignment)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5a41768b769963817ca8/maintainability)](https://codeclimate.com/github/badta5te/prkt.tech-test-assignment/maintainability)
+
 ## About
 
 ### Install
