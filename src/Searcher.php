@@ -2,9 +2,8 @@
 
 namespace App\Prkt;
 
-use App\Prkt\exceptions\MaxSizeException;
-use App\Prkt\exceptions\WrongMimeTypeException;
-use Symfony\Component\Yaml\Yaml;
+use App\Prkt\Config;
+use App\Prkt\Validator;
 
 class Searcher
 {
@@ -15,22 +14,26 @@ class Searcher
     public function __construct($path, $configPath = null)
     {
         $this->path = $path;
-        $this->configPath = __DIR__ . '/config.yaml';
 
-        if ($configPath !== null) {
-            $this->config = $this->parseConfig();
+        //не уверен, что код ниже должен быть в конструкторе
+        if ($this->configPath === null) {
+            $this->config['max_size'] = '1g';
+            $this->config['mime_type'] = 'text/plain';
+            $this->config['case-insensitive'] = false;
         }
+
+        $config = new Config($configPath);
+        $this->config = $config->parseConfig();
     }
 
     public function getOccurrence($string)
     {
-        if ($this->config !== null && !empty($this->validateConfig())) {
-            return implode(", ", $this->validateConfig());
-        }
-
         if (empty($string)) {
             return null;
         }
+
+        $validator = new Validator();
+        $validator->validateConfig($this->path, $this->config);
 
         $data = $this->getContent();
 
@@ -66,43 +69,5 @@ class Searcher
         }
 
         return $data;
-    }
-
-    public function parseConfig()
-    {
-        if ($this->configPath) {
-            $config = Yaml::parse(file_get_contents($this->configPath));
-        }
-
-        return $config;
-    }
-
-    public function validateConfig()
-    {
-
-        if ($this->config['mime_type'] !== mime_content_type($this->path)) {
-            throw new WrongMimeTypeException();
-        }
-
-        $measureUnit = substr(mb_strtolower($this->config['max_size']), -1);
-
-        switch ($measureUnit) {
-            case 'b':
-                $maxSize = preg_replace("/[^0-9]/", '', $this->config['max_size']);
-                break;
-            case 'k':
-                $maxSize = preg_replace("/[^0-9]/", '', $this->config['max_size']) * 1024;
-                break;
-            case 'm':
-                $maxSize = preg_replace("/[^0-9]/", '', $this->config['max_size']) * 1048576;
-                break;
-            case 'g':
-                $maxSize = preg_replace("/[^0-9]/", '', $this->config['max_size']) * 1073741824;
-                break;
-        }
-
-        if ($maxSize < filesize($this->path)) {
-            throw new MaxSizeException();
-        }
     }
 }

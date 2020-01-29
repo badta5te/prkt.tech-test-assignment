@@ -21,5 +21,9 @@
         "classmap": [
             "src/"
         ]
+    },
+    "scripts": {
+        "phpcs": "phpcs",
+        "phpunit" :"phpunit"
     }
 }
